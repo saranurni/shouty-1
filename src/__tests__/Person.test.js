@@ -22,7 +22,7 @@ describe("Person", () => {
 
   it("subscribes to the network", () => {
     // The method will not be called unless we instantiate a new Person IN THIS TEST
-    const newPerson = new Person({ name: "John", network });
+    const newPerson = new Person({ name: "James", network });
 
     expect(subscribeSpy).toHaveBeenCalledWith(newPerson);
   });
