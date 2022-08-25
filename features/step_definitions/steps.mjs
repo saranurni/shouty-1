@@ -3,14 +3,20 @@ import { expect } from "expect";
 import Network from "../../src/models/Network.js";
 import Person from "../../src/models/Person.js";
 
-Given("Lucy is located {float} meters away from Sean", function (distance) {
-  this.network = new Network();
+Given("the range is {float}", function (range) {
+  this.network = new Network(range);
+});
+
+Given("Sean is located at {float}", function (_) {
+  this.shouter = new Person({ name: "Sean", network: this.network });
+});
+
+Given("Lucy is located at {float}", function (position) {
   this.listener = new Person({
     name: "Lucy",
     network: this.network,
-    position: distance,
+    position,
   });
-  this.shouter = new Person({ name: "Sean", network: this.network });
 });
 
 When("Sean shouts {string}", function (message) {
