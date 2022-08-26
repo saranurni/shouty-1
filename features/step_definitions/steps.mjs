@@ -22,6 +22,10 @@ Given(
   }
 );
 
+Given("the maximum character length is {int}", function (maxLength) {
+  this.network = new Network(15, maxLength);
+});
+
 When("{shouter} shouts {string}", function (shouter, message) {
   this.persons[shouter.toLowerCase()].shout(message);
 });
@@ -30,6 +34,19 @@ When("{shouter} shouts:", function (name, dataTable) {
   dataTable.rawTable
     .flat()
     .forEach((msg) => this.persons[name.toLowerCase()].shout(msg));
+});
+
+When("{shouter} shouts,", function (shouter, longMsg) {
+  try {
+    this.persons[shouter.toLowerCase()] = new Person({
+      name: shouter,
+      network: this.network,
+    });
+
+    this.persons[shouter.toLowerCase()].shout(longMsg);
+  } catch (error) {
+    this.error = error;
+  }
 });
 
 Then("{listener} hears {shouter}'s shout", function (listener, shouter) {
@@ -44,5 +61,13 @@ Then(
     expect(this.persons[listener.toLowerCase()].messages).not.toEqual(
       this.persons[shouter.toLowerCase()].shouts
     );
+  }
+);
+
+Then(
+  'an error message is received that states "Message is too long"',
+  function () {
+    expect(this.error).toBeDefined();
+    expect(this.error.message.toLowerCase()).toContain("message is too long");
   }
 );
