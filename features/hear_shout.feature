@@ -25,7 +25,6 @@ Rule: Shouts can be heard by everyone within range.
 
 Rule: Message must be less than the maximum character length.
 
-# TODO: Actually test for hearing and not the shouting so we can incorporate the network
     Scenario: Message is too long
         Given the range is 100
         And the maximum character length is 140
