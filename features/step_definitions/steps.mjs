@@ -23,7 +23,7 @@ Given(
 );
 
 Given("the maximum character length is {int}", function (maxLength) {
-  this.network = new Network(15, maxLength);
+  this.network = new Network(null, maxLength);
 });
 
 When("{shouter} shouts {string}", function (shouter, message) {
