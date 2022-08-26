@@ -28,6 +28,15 @@ When("{shouter} shouts {string}", function (shouter, message) {
 
 Then("{listener} hears {shouter}'s shout", function (listener, shouter) {
   expect(this.persons[listener.toLowerCase()].messages).toEqual(
-    this.persons[shouter.toLowerCase()].messages
+    this.persons[shouter.toLowerCase()].shouts
   );
 });
+
+Then(
+  "{listener} does not hear {shouter}'s shout",
+  function (listener, shouter) {
+    expect(this.persons[listener.toLowerCase()].messages).not.toEqual(
+      this.persons[shouter.toLowerCase()].shouts
+    );
+  }
+);
