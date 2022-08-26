@@ -8,7 +8,10 @@ Rule: Shouts can be heard by everyone within range.
         Given the range is 100
         And Sean is located at 0
         And Lucy is located at 50
-        When Sean shouts "Hello"
+        When Sean shouts:
+            | Hello     |
+            | World     |
+            | From Mars |
         Then Lucy hears Sean's shout
 
     Scenario: Listener is not within range of a shout

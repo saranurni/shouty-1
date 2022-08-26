@@ -26,6 +26,12 @@ When("{shouter} shouts {string}", function (shouter, message) {
   this.persons[shouter.toLowerCase()].shout(message);
 });
 
+When("{shouter} shouts:", function (name, dataTable) {
+  dataTable.rawTable
+    .flat()
+    .forEach((msg) => this.persons[name.toLowerCase()].shout(msg));
+});
+
 Then("{listener} hears {shouter}'s shout", function (listener, shouter) {
   expect(this.persons[listener.toLowerCase()].messages).toEqual(
     this.persons[shouter.toLowerCase()].shouts
